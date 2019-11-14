@@ -1,0 +1,27 @@
+{
+  "name": "raicon",
+  "version": "1.0.0",
+  "description": "Page specific Javascript for Ruby On Rails with Webpack inside",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "test": "echo \"Error: no test specified\" && exit 1",
+  },
+  "keywords": [
+    "raicon",
+    "page-specific-js-rails",
+    "page-specific-js-webpack-rails",
+    "page-specific-rails",
+    "page-specific-js",
+    "page-specific-javascript",
+    "page-specific",
+    "page-js-rails"
+  ],
+  "author": "bentran",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-minify": "^0.5.1"
+  }
+}
