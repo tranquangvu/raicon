@@ -6,13 +6,17 @@ Raicon support for rails 4.2+ use `webpacker` to manage assets.
 
 ## Installation
 ```
+  // npm
   npm install --save raicon
+
+  // yarn
+  yarn add raicon
 ```
 
 ## Usage
-Raicon will runs your code after DOM is ready (turbolinks supported), negating the need for `$(document).ready` or `document.addEventListener('turbolinks:load', () => {})`.
+Raicon will runs your code after DOM is ready (support turbolinks), negating the need for `$(document).ready` or `document.addEventListener('turbolinks:load', () => {})`.
 
-### Add raicon data attributes in views
+### Add raicon data attributes
   - Define helper method in `helpers/application_helper.rb`:
 
     ```
@@ -110,7 +114,7 @@ Raicon support `:before` and `:after` events for every action in controller. The
   'raicon:after:${controller_path}#${action_name}'
 ```
 
-Example, for above raicon controller we have these event listeners:
+For above raicon controller we have these event listeners:
 
 ```
   document.addEventListener('raicon:before:posts#index', () => {});
