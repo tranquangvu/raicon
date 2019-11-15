@@ -1,17 +1,21 @@
 const BEFORE_EACH_ACTION = 'beforeEach';
 
 export default class Raicon {
-  static register(targetController, handler, hasTurbolink = true) {
-    const raicon = new Raicon(targetController, handler, hasTurbolink);
+  static register(targetController, handler, hasTurbolinks = true) {
+    if (!targetController || !handler) {
+      throw '[Raicon] Invalid arguments on register.'
+    }
+
+    const raicon = new Raicon(targetController, handler, hasTurbolinks);
     raicon.setup();
 
     return raicon;
   }
 
-  constructor(targetController, handler, hasTurbolink) {
+  constructor(targetController, handler, hasTurbolinks) {
     this.targetController = targetController;
     this.handler = this.generateHandler(handler);
-    this.hasTurbolink = hasTurbolink;
+    this.hasTurbolinks = hasTurbolinks;
   }
 
   getTargetController() {
@@ -23,7 +27,7 @@ export default class Raicon {
   }
 
   setup() {
-    const readyEvent = this.hasTurbolink ? 'turbolinks:load' : 'DOMContentLoaded';
+    const readyEvent = this.hasTurbolinks ? 'turbolinks:load' : 'DOMContentLoaded';
     document.addEventListener(readyEvent, this.onReady.bind(this));
   }
 
