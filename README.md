@@ -59,8 +59,8 @@ Raicon will runs your code after DOM is ready (support turbolinks), negating the
       Raicon.register(targetController, hanlerClass, hasTurbolinks = true);
 
       // Arguments:
-      //  targetController: string - value is mapped to `controller_path` value of the target controller from rails
-      //  hanlerClass: ES6 class - class includes methods have same name with `action_name` value of the target controller from rails
+      //  targetController: string - value is mapped to camel tranformed `controller_path` value of the target controller from rails. ex: `admin/my_posts_controller` in rails will become `admin/myPosts`
+      //  hanlerClass: ES6 class - class includes methods have same name with camel tranformed `action_name` value of the target controller from rails. ex: `assign_post` in rails will become `assignPost`
       //  hasTurbolinks: boolean (default is true) - check if we use turbolinks or not
     ```
 
