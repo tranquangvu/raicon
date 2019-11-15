@@ -3,7 +3,7 @@ const BEFORE_EACH_ACTION = 'beforeEach';
 export default class Raicon {
   static register(targetController, handler, hasTurbolinks = true) {
     if (!targetController || !handler) {
-      throw '[Raicon] Invalid arguments on register.'
+      throw '[Raicon] Invalid arguments on register.';
     }
 
     const raicon = new Raicon(targetController, handler, hasTurbolinks);
@@ -42,7 +42,7 @@ export default class Raicon {
 
   executeHandlerOnAction(action) {
     if (!this.handler || (typeof this.handler[action] !== 'function')) {
-      throw `[Raicon] Invalid action ${action} in handler for controller ${this.targetController}.`
+      throw `[Raicon] Invalid action ${action} in handler for controller ${this.targetController}.`;
     }
 
     if (action !== BEFORE_EACH_ACTION) {
