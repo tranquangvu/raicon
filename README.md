@@ -10,10 +10,11 @@ Raicon support for rails 4.2+ use `webpacker` to manage assets.
 ```
 
 ## Usage
-Raicon will runs your code after DOM is ready (turbolinks supported), negating the need for `$(document).ready` or `document.addEventListener(turbolinks:load, () => {})`.
+Raicon will runs your code after DOM is ready (turbolinks supported), negating the need for `$(document).ready` or `document.addEventListener('turbolinks:load', () => {})`.
 
-##### Add raicon data attributes in views
+### Add raicon data attributes in views
   - Define helper method in `helpers/application_helper.rb`:
+
     ```
       // With *.erb
       def raicon_data_attributes
@@ -31,7 +32,9 @@ Raicon will runs your code after DOM is ready (turbolinks supported), negating t
         }
       end
     ```
+
   - Add data attributes defined from `raicon_data_attributes` method to `body` tag:
+
     ```
       // With *.erb
       <body <%= raicon_data_attributes %>>
@@ -43,8 +46,9 @@ Raicon will runs your code after DOM is ready (turbolinks supported), negating t
         == yield
     ```
 
-##### Register handler class for target controller
+### Register handler class for target controller
   - To run JS on a certain page, you register like this:
+
     ```
       import Raicon from 'raicon';
 
@@ -57,10 +61,11 @@ Raicon will runs your code after DOM is ready (turbolinks supported), negating t
     ```
 
   - Example:
+
     ```
       import Raicon from 'raicon';
 
-      class PostJSController {
+      class PostsController {
         beforeEach() {
           console.log('Run before all action pages');
         }
@@ -84,16 +89,17 @@ Raicon will runs your code after DOM is ready (turbolinks supported), negating t
         }
       }
 
-      Raicon.register('posts', PostJSController);
+      Raicon.register('posts', PostsController);
     ```
 
   - Reuse method from handler class:
+
     ```
-      window.postRaincon = Raicon.register('posts', PostJSController);
+      window.postRaincon = Raicon.register('posts', PostsController);
 
       // Reuse method in handler
-      const postJSController = window.postRaincon.getHandler();
-      postJSController.initForm();
+      const postsController = window.postRaincon.getHandler();
+      postsController.initForm();
     ```
 
 ## License
