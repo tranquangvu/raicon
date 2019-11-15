@@ -95,12 +95,33 @@ Raicon will runs your code after DOM is ready (turbolinks supported), negating t
   - Reuse method from handler class:
 
     ```
-      window.postRaincon = Raicon.register('posts', PostsController);
+      window.postRaicon = Raicon.register('posts', PostsController);
 
       // Reuse method in handler
-      const postsController = window.postRaincon.getHandler();
+      const postsController = window.postRaicon.getHandler();
       postsController.initForm();
     ```
+
+### Events
+Raicon support `:before` and `:after` events for every action in controller. The name of event follow this pattern:
+
+```
+  'raicon:before:${controller_path}#${action_name}'
+  'raicon:after:${controller_path}#${action_name}'
+```
+
+Example, for above raicon controller we have these event listeners:
+
+```
+  document.addEventListener('raicon:before:posts#index', () => {});
+  document.addEventListener('raicon:after:posts#index', () => {});
+
+  document.addEventListener('raicon:before:posts#new', () => {});
+  document.addEventListener('raicon:after:posts#new', () => {});
+
+  document.addEventListener('raicon:before:posts#edit', () => {});
+  document.addEventListener('raicon:after:posts#edit', () => {});
+```
 
 ## License
 This package is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
