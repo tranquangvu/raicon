@@ -35,7 +35,7 @@ export default class Raicon {
     this.collectCurrentHandlerAttrs();
 
     if (this.targetController === this.currentController) {
-      this.executeHandlerOnAction(BEFORE_EACH_ACTION);
+      !!this.handler[BEFORE_EACH_ACTION] && this.executeHandlerOnAction(BEFORE_EACH_ACTION);
       this.executeHandlerOnAction(this.currentAction);
     }
   }
