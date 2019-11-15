@@ -95,3 +95,6 @@ Raicon will runs your code after DOM is ready (turbolinks supported), negating t
       const postJSController = window.postRaincon.getHandler();
       postJSController.initForm();
     ```
+
+## License
+This package is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
