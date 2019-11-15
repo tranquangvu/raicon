@@ -5,17 +5,15 @@
   "main": "./dist/index.js",
   "scripts": {
     "build": "babel src --out-dir dist",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "raicon",
-    "page-specific-js-rails",
-    "page-specific-js-webpack-rails",
-    "page-specific-rails",
-    "page-specific-js",
     "page-specific-javascript",
-    "page-specific",
-    "page-js-rails"
+    "javascript",
+    "webpack",
+    "webpacker",
+    "rails"
   ],
   "author": "bentran",
   "license": "ISC",
