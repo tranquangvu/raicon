@@ -145,21 +145,24 @@ Raicon runs your JS code after DOM is ready (support turbolinks), don't need to 
 Raicon support `:before` and `:after` events for every action in controller. The name of event follow this pattern:
 
 ```
-  'raicon:before:${controller_path}#${action_name}'
-  'raicon:after:${controller_path}#${action_name}'
+  'raicon:before:${targetController}#${methodName}'
+  'raicon:after:${targetController}#${methodName}'
 ```
 
 For above raicon controller we have these event listeners:
 
 ```
-  document.addEventListener('raicon:before:posts#index', () => {});
-  document.addEventListener('raicon:after:posts#index', () => {});
+  document.addEventListener('raicon:before:myPosts#index', () => {});
+  document.addEventListener('raicon:after:myPosts#index', () => {});
 
-  document.addEventListener('raicon:before:posts#new', () => {});
-  document.addEventListener('raicon:after:posts#new', () => {});
+  document.addEventListener('raicon:before:myPosts#favoritePosts', () => {});
+  document.addEventListener('raicon:after:myPosts#favoritePosts', () => {});
 
-  document.addEventListener('raicon:before:posts#edit', () => {});
-  document.addEventListener('raicon:after:posts#edit', () => {});
+  document.addEventListener('raicon:before:myPosts#new', () => {});
+  document.addEventListener('raicon:after:myPosts#new', () => {});
+
+  document.addEventListener('raicon:before:myPosts#edit', () => {});
+  document.addEventListener('raicon:after:myPosts#edit', () => {});
 ```
 
 ## License
