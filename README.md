@@ -1,8 +1,5 @@
 # Raicon
-Page Specific Javascript for Ruby On Rails which use Webpack inside.
-
-## Compatibility
-Raicon support for rails 4.2+ use `webpacker` to manage assets.
+Page specific Javascript for Ruby On Rails application use Webpack to manage assets.
 
 ## Installation
 ```
@@ -14,7 +11,7 @@ Raicon support for rails 4.2+ use `webpacker` to manage assets.
 ```
 
 ## Usage
-Raicon will runs your code after DOM is ready (support turbolinks), negating the need for `$(document).ready` or `document.addEventListener('turbolinks:load', () => {})`.
+Raicon runs your JS code after DOM is ready (support turbolinks), don't need to add `$(document).ready` or `document.addEventListener('turbolinks:load', () => {})`.
 
 ### Add raicon data attributes
   - Define helper method in `helpers/application_helper.rb`:
@@ -51,7 +48,7 @@ Raicon will runs your code after DOM is ready (support turbolinks), negating the
     ```
 
 ### Register handler class for target controller
-  - To run JS on a certain page, you register like this:
+  - To run JS on a certain page, you can register a handler like this:
 
     ```
       import Raicon from 'raicon';
@@ -59,32 +56,70 @@ Raicon will runs your code after DOM is ready (support turbolinks), negating the
       Raicon.register(targetController, hanlerClass, hasTurbolinks = true);
 
       // Arguments:
-      //  targetController: string - value is mapped to camel tranformed `controller_path` value of the target controller from rails. ex: `admin/my_posts_controller` in rails will become `admin/myPosts`
-      //  hanlerClass: ES6 class - class includes methods have same name with camel tranformed `action_name` value of the target controller from rails. ex: `assign_post` in rails will become `assignPost`
-      //  hasTurbolinks: boolean (default is true) - check if we use turbolinks or not
+      //  - targetController: string - camelcase transformation of `controller_path` value of the controller from rails.
+      //  - hanlerClass: class - class includes methods (method's name is camelcase transformation of `action_name` value of the controller from rails) to run JS code for specific page.
+      //  - hasTurbolinks: boolean (default is true) - check if we use turbolinks or not
     ```
 
+  - Controller path and action name camelcase transformation example:
+    ```
+      // Controller path transformation
+      controller: 'app/controllers/my_posts_controller.rb' -> controller_path: 'my_posts' -> targetController: 'myPosts'
+      controller: 'app/controllers/my_admin/my_posts_controller.rb' -> controller_path: 'my_admin/my_posts' -> targetController: 'myAdmin/myPosts'
+
+      // Action name transformation
+      action: 'posts' -> methodName: 'posts'
+      action: 'favorite_posts' -> methodName: 'favoritePosts'
+    ```
+
+
   - Example:
+
+    Rails controller in `app/controllers/my_posts_controller.rb`:
+
+    ```
+      class MyPostsController < ApplicationController
+        def index; end
+
+        def favorite_posts; end
+
+        def new; end
+
+        def create; end
+
+        def edit; end
+
+        def update; end
+
+        def destroy; end
+      end
+    ```
+
+    JS Raicon controller:
 
     ```
       import Raicon from 'raicon';
 
-      class PostsController {
+      class MyPostsController {
         beforeEach() {
-          console.log('Run before all action pages');
+          console.log('Run after DOM ready in all pages');
         }
 
         index() {
-          console.log('Run in index action page');
+          console.log('Run after DOM ready in page rendered by app/views/my_posts/index.html.erb');
+        }
+
+        favoritePosts() {
+          console.log('Run after DOM ready in page rendered by app/views/my_posts/favorite_posts.html.erb');
         }
 
         new() {
-          console.log('Run in new action page');
+          console.log('Run after DOM ready in page rendered by app/views/my_posts/new.html.erb');
           this.initForm();
         }
 
         edit() {
-          console.log('Run in edit action page');
+          console.log('Run after DOM ready in page rendered by app/views/my_posts/edit.html.erb');
           this.initForm();
         }
 
@@ -93,17 +128,17 @@ Raicon will runs your code after DOM is ready (support turbolinks), negating the
         }
       }
 
-      Raicon.register('posts', PostsController);
+      Raicon.register('myPosts', MyPostsController);
     ```
 
   - Reuse method from handler class:
 
     ```
-      window.postRaicon = Raicon.register('posts', PostsController);
+      window.myPostsRc = Raicon.register('myPosts', MyPostsController);
 
       // Reuse method in handler
-      const postsController = window.postRaicon.getHandler();
-      postsController.initForm();
+      const myPostsController = window.myPostsRc.getHandler();
+      myPostsController.initForm();
     ```
 
 ### Events
